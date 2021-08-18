@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
-import { ExpirationVerificationListener } from './events/listeners/expiration-verification-complete-listener';
 
 
 
@@ -44,7 +43,6 @@ if (!process.env.NATS_CLUSTER_ID) {
       process.on('SIGINT', () => natsWrapper.client.close());
       process.on('SIGTERM', () => natsWrapper.client.close());
 
-      new ExpirationVerificationListener(natsWrapper.client).listen();
      
      
 

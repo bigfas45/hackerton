@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: vbox45/auth
+          image: us.gcr.io/v-box-318815/auth
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -26,26 +26,8 @@ spec:
               value: VBOX
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-srv:27017/auth'
-            - name: JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
-            - name: SENDGRID
-              valueFrom:
-                secretKeyRef:
-                  name: send-grid-secret
-                  key: SENDGRID
-            - name: TWILIO_ACCOUNT_SID
-              valueFrom:
-                secretKeyRef:
-                  name: twilio-account-secret
-                  key: TWILIO_ACCOUNT_SID
-            - name: TWILIO_AUTH_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: twilio-auth-token-secret
-                  key: TWILIO_AUTH_TOKEN
+
+
 ---
 apiVersion: v1
 kind: Service

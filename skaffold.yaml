@@ -3,15 +3,14 @@ kind: Config
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
       - ./infra/k8s-dev/*
 build:
-  local:
-    push: false
-  # googleCloudBuild:
-  #   projectId: v-box-318815
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: v-box-318815
   artifacts:
-    - image: vbox45/auth
+    - image: us.gcr.io/v-box-318815/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -19,32 +18,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: vbox45/expiration
-      context: expiration
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
-    - image: vbox45/movies
-      context: movies
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
-    - image: vbox45/vbox
+    - image: us.gcr.io/v-box-318815/vbox
       context: vbox
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.js'
-            dest: .
-    - image: vbox45/producer
-      context: producer
       docker:
         dockerfile: Dockerfile
       sync:
